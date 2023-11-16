@@ -1,6 +1,6 @@
 
 library(purrr)
-df <- read.csv("data_understanding_plsv01.csv")
+df <- read.csv("data/data_understanding_plsv01.csv")
 
 # Functions 
 

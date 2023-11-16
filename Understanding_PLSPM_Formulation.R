@@ -4,15 +4,20 @@ df <- read.csv("data_understanding_plsv01.csv")
 
 # Functions 
 
-sd.p <- function(x){sd(x)*sqrt((length(x)-1)/length(x))} # population sd 
+
+# population sd
+sd.p <- function(x){sd(x)*sqrt((length(x)-1)/length(x))}
+
+
 stand_vector <- function(x){
     vec_mean = mean(x)
     vec_sd = sd.p(x)
     stand_vec = (x-vec_mean) / vec_sd
     return(round(stand_vec,3))}
 
+#population cov
 cov.p <- function(x,y=NULL) {
-  cov(x,y)*(NROW(x)-1)/NROW(x)}
+  cov(x,y,)*(NROW(x)-1)/NROW(x)}
 
 # Step 1 standardize each vector in Dataset
 df <- purrr::map_df(df, stand_vector)
@@ -118,6 +123,7 @@ r2 <- summary$r.squared
 product_loyalty_path <- summary$coefficients[2,1]
 service_loyalty_path <- summary$coefficients[3,1]
 
+if (interactive()) {
 print("Values for Manifest Variable Loadings:")
 print(outer_loadings)
 
@@ -125,3 +131,5 @@ print("Regression coefficients between latent variables")
 print(paste("Product to loyalty path coefficient",product_loyalty_path))
 print(paste("Service to loyalty path coefficient",service_loyalty_path))
 print(paste("Model R2:", r2))
+}
+
